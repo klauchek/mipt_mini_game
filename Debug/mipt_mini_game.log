@@ -1,0 +1,19 @@
+﻿  Character.cpp
+d:\code\mipt_mini_game\mipt_mini_game\character.cpp(19): warning C4244: аргумент: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+  Fucker.cpp
+  Game_Menu.cpp
+d:\code\mipt_mini_game\mipt_mini_game\game_menu.cpp(57): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+  map.cpp
+  mipt_mini_game.cpp
+  Player.cpp
+d:\code\mipt_mini_game\mipt_mini_game\player.cpp(10): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+d:\code\mipt_mini_game\mipt_mini_game\player.cpp(12): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+d:\code\mipt_mini_game\mipt_mini_game\player.cpp(22): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+d:\code\mipt_mini_game\mipt_mini_game\player.cpp(30): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+d:\code\mipt_mini_game\mipt_mini_game\player.cpp(49): warning C4305: =: усечение из "double" в "float"
+  Создание кода...
+  mipt_mini_game.vcxproj -> D:\Code\mipt_mini_game\Debug\mipt_mini_game.exe
