@@ -1,4 +1,6 @@
 #include "Character.h"
+#include "map.h"
+#include "Player.h"
 
 Character::Character(String F, float X, float Y, float A, float B, float W, float H)
 {  //Конструктор с параметрами(формальными) для класса Player. При создании объекта класса мы будем задавать имя файла, координату Х и У, ширину и высоту
@@ -27,7 +29,7 @@ Sprite Character::get_sprite()
 
 }
 
-void Character::update(float time)
+void Character::update(Map& map, float time)
 {
     {
         switch (direction)
@@ -54,6 +56,7 @@ void Character::update(float time)
 
         speed = 0;
         sprite.setPosition(x, y);
+        interactionWithMap(map, time);
     }
 
 }
