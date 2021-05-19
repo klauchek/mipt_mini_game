@@ -47,14 +47,14 @@ void Game_Menu::run_math(RenderWindow& window)
     //String F, float X, float Y, float A, float B, float W, float H)
     Player student("student.png", 100, 100, 100, 0, 41, 57);
     Fucker Podlipskiy("Podlipskiy.jpg", 200, 200, 0, 0, 55, 55);
-    Fucker Umnov_Jr();
+    Fucker Umnov_Jr("Umnov_Jr.jpg", 300, 300, 0, 0, 55, 55);
 
     float CurrentFrame = 0;
     Clock clock;
 
     int counter = 0;
-    int dir_p = LEFT;
-    int dir_u = UP;
+    int dir_podlipa = LEFT;
+    int dir_umnov = UP;
 
 
 
@@ -71,25 +71,35 @@ void Game_Menu::run_math(RenderWindow& window)
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-
         }
 
+        if (student.control(time, CurrentFrame, map))
+        {
 
+
+            RenderWindow new_window(VideoMode(1200, 675), "The Lion King Maze. Level 2");
+            window.close();
+            run_math(new_window);
+            return;
+        }
 
         if (counter % 700 == 0)
         {
-            dir_p = std::rand() % 4 + 6;
-            dir_u = std::rand() % 4 + 6;
+            dir_podlipa = std::rand() % 4 + 6;
+            dir_umnov = std::rand() % 4 + 6;
         }
 
 
         map.draw_map(map.get_sprite(), window);
 
-        student.control(time, CurrentFrame);
+       // student.control(time, CurrentFrame, map);
         student.update(map, time);
 
-        Podlipskiy.control(time, dir_p);
+        Podlipskiy.control(time, dir_podlipa, map);
         Podlipskiy.update(map, time);
+
+        Umnov_Jr.control(time, dir_umnov, map);
+        Umnov_Jr.update(map, time);
 
 
         window.clear();
@@ -99,6 +109,7 @@ void Game_Menu::run_math(RenderWindow& window)
         map.draw_map(map.get_sprite(), window);
         window.draw(student.get_sprite());
         window.draw(Podlipskiy.get_sprite());
+        window.draw(Umnov_Jr.get_sprite());
 
 
         window.display();
@@ -137,7 +148,7 @@ void Game_Menu::run_phys(RenderWindow& window)
         }
 
         map.draw_map(map.get_sprite(), window);
-        student.control(time, CurrentFrame);
+        student.control(time, CurrentFrame, map);
         student.update(map, time);
 
         window.clear();

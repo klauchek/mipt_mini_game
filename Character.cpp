@@ -29,7 +29,7 @@ Sprite Character::get_sprite()
 
 }
 
-void Character::update(Map& map, float time)
+bool Character::update(Map& map, float time)
 {
     {
         switch (direction)
@@ -56,7 +56,9 @@ void Character::update(Map& map, float time)
 
         speed = 0;
         sprite.setPosition(x, y);
-        interactionWithMap(map, time);
+        
+        
+        return interactionWithMap(map, time);
     }
 
 }

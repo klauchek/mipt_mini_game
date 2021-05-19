@@ -31,12 +31,12 @@ public:
 	~Character();
 
 	Sprite get_sprite();
-	void update(Map& map, float time); //реализация одинаковая, просто обработка направлений движения
-	virtual void interactionWithMap(Map& map, float time) = 0;//у каждого своя реализация, правда, отличия небольшие - у playera добавится только обработка препятствий
+	bool update(Map& map, float time); //реализация одинаковая, просто обработка направлений движения
+	virtual bool interactionWithMap(Map& map, float time) = 0;//у каждого своя реализация, правда, отличия небольшие - у playera добавится только обработка препятствий
 	//virtual void control(float time, float& CurrentFrame) = 0;
 	//override??
 
-	/*int get_direction();*/
+
 
 
 };

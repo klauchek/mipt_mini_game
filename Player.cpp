@@ -5,7 +5,7 @@
 Player::Player(String F, float X, float Y, float A, float B, float W, float H) : Character(F, X, Y, A, B, W, H) {}
 Player::~Player() {}
 
-void Player::interactionWithMap(Map& map, float time)
+bool Player::interactionWithMap(Map& map, float time)
 {
     for (int i = y / 51; i < (y + h) / 51; ++i)
     {
@@ -41,10 +41,12 @@ void Player::interactionWithMap(Map& map, float time)
             //}
         }
     }
+
+    return false;
 }
 
 
-void Player::control(float time, float& CurrentFrame)
+bool Player::control(float time, float& CurrentFrame, Map& map)
 {
     speed = 0.2;
     CurrentFrame += 0.005f * time;
@@ -76,4 +78,5 @@ void Player::control(float time, float& CurrentFrame)
     else
         speed = 0;
 
+    return update(map, time);
 }

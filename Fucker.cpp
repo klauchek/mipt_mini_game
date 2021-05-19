@@ -4,7 +4,7 @@ Fucker::Fucker(String F, float X, float Y, float A, float B, float W, float H) :
 Fucker::~Fucker() {}
 
 
-void Fucker::control(float time, int dir)
+bool Fucker::control(float time, int dir, Map& map)
 {
     direction = dir;
     speed = 0.15;
@@ -14,16 +14,18 @@ void Fucker::control(float time, int dir)
     case UP:
     case RIGHT:
     case DOWN:
-    case LEFT: sprite.setTextureRect(IntRect(0, 0, 55, 55));
+    case LEFT:
+        sprite.setTextureRect(IntRect(0, 0, 55, 55));
         break;
     default:
         break;
     }
 
+    return update(map, time);
 }
 
 //now the same as Player has
-void Fucker::interactionWithMap(Map& map, float time)
+bool Fucker::interactionWithMap(Map& map, float time)
 {
     for (int i = y / 51; i < (y + h) / 51; ++i)
     {
@@ -58,6 +60,10 @@ void Fucker::interactionWithMap(Map& map, float time)
             //    }
             //}
         }
+
+
     }
+
+    return false;
 }
 
