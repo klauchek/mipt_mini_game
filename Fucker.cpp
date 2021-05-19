@@ -4,16 +4,31 @@ Fucker::Fucker(String F, float X, float Y, float A, float B, float W, float H) :
 Fucker::~Fucker() {}
 
 
-bool Fucker::control(float time, int dir, Map& map)
+int Fucker::get_direction()
+{
+    return direction;
+}
+
+void Fucker::set_direction(int dir)
 {
     direction = dir;
+}
+
+bool Fucker::control(float time, Map& map)
+{
     speed = 0.15;
 
     switch (direction)
     {
     case UP:
+        sprite.setTextureRect(IntRect(0, 0, 55, 55));
+        break;
     case RIGHT:
+        sprite.setTextureRect(IntRect(0, 0, 55, 55));
+        break;
     case DOWN:
+        sprite.setTextureRect(IntRect(0, 0, 55, 55));
+        break;
     case LEFT:
         sprite.setTextureRect(IntRect(0, 0, 55, 55));
         break;

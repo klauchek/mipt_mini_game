@@ -48,7 +48,12 @@ bool Player::interactionWithMap(Map& map, float time)
 
 bool Player::control(float time, float& CurrentFrame, Map& map)
 {
-    speed = 0.2;
+
+    //if (mode == PATH)
+        speed = 0.2;
+   // else if (mode == EXAM)
+      //  speed = 0.00;
+
     CurrentFrame += 0.005f * time;
 
     if (Keyboard::isKeyPressed(Keyboard::Right))

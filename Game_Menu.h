@@ -13,6 +13,7 @@ private:
 
     enum Buttons
     {
+
         EXIT = 1,
         MATH = 2,
         PHYS = 3,
@@ -35,8 +36,8 @@ private:
         EXIT_BUTTON_WIDTH = 100,
         EXIT_BUTTON_HEIGHT = 100,
 
-        WINDOW_WIDTH = 1200,
-        WINDOW_HEIGHT = 675
+        WINDOW_WIDTH = 1300,
+        WINDOW_HEIGHT = 700,
     };
 
     //const static bool NO = false;
