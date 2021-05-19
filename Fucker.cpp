@@ -21,14 +21,8 @@ bool Fucker::control(float time, Map& map)
     switch (direction)
     {
     case UP:
-        sprite.setTextureRect(IntRect(0, 0, 55, 55));
-        break;
     case RIGHT:
-        sprite.setTextureRect(IntRect(0, 0, 55, 55));
-        break;
     case DOWN:
-        sprite.setTextureRect(IntRect(0, 0, 55, 55));
-        break;
     case LEFT:
         sprite.setTextureRect(IntRect(0, 0, 55, 55));
         break;

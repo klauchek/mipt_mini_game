@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "map.h"
 #include "Player.h"
+#include<iostream>
 
 Character::Character(String F, float X, float Y, float A, float B, float W, float H)
 {  //Конструктор с параметрами(формальными) для класса Player. При создании объекта класса мы будем задавать имя файла, координату Х и У, ширину и высоту
@@ -35,6 +36,7 @@ bool Character::update(Map& map, float time)
         switch (direction)
         {
         case DOWN: dx = 0;
+            std::cout << "Love you" << std::endl;
             dy = speed;
             break;
 

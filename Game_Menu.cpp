@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Fucker.h"
 #include "map.h"
+#include <iostream>
 using namespace sf;
 
 
@@ -56,18 +57,17 @@ void Game_Menu::run_math(RenderWindow& window)
     float CurrentFrame = 0;
     Clock clock;
 
-
-    long long int counter = 0;
+    long long int counter = 1000;
 
     //int mode = PATH;
 
     Podlipskiy.set_direction(DOWN);
     Umnov_Jr.set_direction(UP);
 
-
     while (window.isOpen())
     {
-        ++counter;
+        counter++;
+        std:: cout << counter << std::endl;
         float time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
         time = time / 800;
@@ -81,27 +81,38 @@ void Game_Menu::run_math(RenderWindow& window)
         }
 
  //------------------------------------------pseudo-random direction
-        if (counter % 449 == 0)
-        {
-            Podlipskiy.set_direction((DOWN + 1) % 5);
-            Umnov_Jr.set_direction((UP + 1) % 5);
-        }
-        else if (counter % 727  == 0)
-        {
-            Podlipskiy.set_direction((DOWN + 2) % 5);
-            Umnov_Jr.set_direction((UP + 2) % 5);
-        }
-        else if (counter % 1077 == 0)
-        {
-            Podlipskiy.set_direction((DOWN + 3) % 5);
-            Umnov_Jr.set_direction((UP + 3) % 5);
-        }
-        else if (counter % 1586 == 0)
-        {
-            Podlipskiy.set_direction((DOWN + 4) % 5);
-            Umnov_Jr.set_direction((UP + 4) % 5);
-        }
 
+        int a = 1429, b = 1811, c = 1747, d = 1578;
+            if (counter % a == 0)
+            {
+                Podlipskiy.set_direction(counter % 5);
+                Umnov_Jr.set_direction((counter + 1) % 5);
+            }
+            else if (counter % b == 0)
+            {
+                Podlipskiy.set_direction(counter % 5);
+                Umnov_Jr.set_direction((counter + 1) % 5);
+            }
+            else if (counter % c == 0)
+            {
+                Podlipskiy.set_direction(counter % 5);
+                Umnov_Jr.set_direction((counter + 1) % 5);
+            }
+            else if (counter % d == 0)
+            {
+                Podlipskiy.set_direction(counter % 5);
+                Umnov_Jr.set_direction((counter + 1) % 5);
+            }
+
+            if (counter >= 9000)
+            {
+                counter = 1000;
+                a += 5;
+                b += 5;
+                c += 5;
+                d += 5;
+            }
+ 
 //------------------------------------------------------------------------
   
         student.control(time, CurrentFrame, map);
