@@ -36,8 +36,11 @@ private:
         EXIT_BUTTON_WIDTH = 100,
         EXIT_BUTTON_HEIGHT = 100,
 
-        WINDOW_WIDTH = 1300,
-        WINDOW_HEIGHT = 700,
+        GAME_WINDOW_WIDTH = 1300,
+        GAME_WINDOW_HEIGHT = 700,
+
+        WINDOW_WIDTH = 1200,
+        WINDOW_HEIGHT = 675,
     };
 
     //const static bool NO = false;

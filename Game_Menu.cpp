@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Fucker.h"
 #include "map.h"
+#include "Exam.h"
 
 using namespace sf;
 
@@ -47,14 +48,14 @@ void Game_Menu::create_game_exit_button(const string& game_exit_button_)
 //----------running levels 
 void Game_Menu::run_math(RenderWindow& window)
 {
-    setlocale(LC_ALL, "RUSSIAN");
 
     Map map("math_map.png");
 
     //String F, float X, float Y, float A, float B, float W, float H)
-    Player student("student.png", 100, 100, 100, 0, 41, 57);
+    Player student("student.png", 55, 530, 100, 0, 41, 57);
     Fucker Podlipskiy("Podlipskiy.jpg", 200, 200, 0, 0, 55, 55);
     Fucker Umnov_Jr("Umnov_Jr.jpg", 300, 300, 0, 0, 55, 55);
+    ExamBar Exam;
 
     float CurrentFrame = 0;
     Clock clock;
@@ -116,9 +117,10 @@ void Game_Menu::run_math(RenderWindow& window)
  
 //------------------------------------------------------------------------
   
-        student.control(time, CurrentFrame, map);
+        student.control(time, map, CurrentFrame);
         Podlipskiy.control(time, map);
         Umnov_Jr.control(time, map);
+        Exam.update(student.getScore());
 
 
 
@@ -130,6 +132,7 @@ void Game_Menu::run_math(RenderWindow& window)
         window.draw(student.get_sprite());
         window.draw(Podlipskiy.get_sprite());
         window.draw(Umnov_Jr.get_sprite());
+        Exam.draw(window);
 
 
         window.display();
@@ -140,7 +143,6 @@ void Game_Menu::run_math(RenderWindow& window)
 
 void Game_Menu::run_phys(RenderWindow& window)
 {
-    setlocale(LC_ALL, "RUSSIAN");
 
     Map map("phys_map.png");
 
@@ -209,7 +211,7 @@ void Game_Menu::run_phys(RenderWindow& window)
 
         //------------------------------------------------------------------------
  
-        student.control(time, CurrentFrame, map);
+        student.control(time, map, CurrentFrame);
         Bulygin.control(time, map);
         Kuznetsov.control(time, map);
 
@@ -259,7 +261,7 @@ void Game_Menu:: game_welcome_page(const string& game_menu_background_,
 
 void Game_Menu::math_department_button_pressed(RenderWindow& window)
 {
-    RenderWindow new_window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "MATH");
+    RenderWindow new_window(VideoMode(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT), "MATH");
     window.close();
     run_math(new_window);
 
@@ -267,7 +269,7 @@ void Game_Menu::math_department_button_pressed(RenderWindow& window)
 }
 void Game_Menu::physics_department_button_pressed(RenderWindow& window)
 {
-    RenderWindow new_window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "PHYSICS");
+    RenderWindow new_window(VideoMode(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT), "PHYSICS");
     window.close();
     run_phys(new_window);
 

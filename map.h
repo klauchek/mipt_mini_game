@@ -2,7 +2,7 @@
 #define __MAP__H__
 
 #include "SFML/Graphics.hpp"
-#include <locale>
+
 using namespace sf;
 
 
@@ -25,18 +25,18 @@ public:
 
     String TileMap[HEIGHT_MAP] = {
     "00000000000000000000000000",
-    "0                        0",
-    "0 abcdefg       11111    0",
-    "0 ABCDEFGH      1        0",
-    "0 ijklmnop      1        0",
-    "0 IJKLMNOP      1        0",
-    "0 {}[]()23     11        0",
-    "0   1111111111111        0",
-    "0   1       qrstuvwx     0",
-    "0   1       QRSTUVWX     0",
-    "0   1       456789?%     0",
-    "0   1       $+=-_;:*     0",
-    "0           &yzYZ!@#     0",
+    "0 abcdefgh               0",
+    "0 ABCDEFGH    111111111  0",
+    "0 ijklmnop    111111111  0",
+    "0 IJKLMNOP    111    11  0",
+    "0 {}[]()23    111    11  0",
+    "0       111111111    11  0",
+    "0   1111111111111    11  0",
+    "0   1111111 qrstuvwx 11110",
+    "0   11      QRSTUVWX111110",
+    "0111111111  456789?%111  0",
+    "0111111111  $+=-_;:*     0",
+    "0   11  11  &yzYZ!@#     0",
     "00000000000000000000000000",
     };
 
