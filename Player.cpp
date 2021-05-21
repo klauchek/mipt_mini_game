@@ -45,7 +45,6 @@ bool Player::interactionWithMap(Map& map, float time)
             else if (((map.TileMap[i][j] == 'X') || (map.TileMap[i][j] == '%')) && score < 2)
             {
                 ++score;
-                std::cout << score << std::endl;
             }
         }
     }
@@ -54,7 +53,7 @@ bool Player::interactionWithMap(Map& map, float time)
 }
 
 
-bool Player::control(float time, Map& map, float CurrentFrame)
+bool Player::control(float time, Map& map, float& CurrentFrame)
 {
 
     //if (mode == PATH)
@@ -94,7 +93,14 @@ bool Player::control(float time, Map& map, float CurrentFrame)
     return update(map, time);
 }
 
+
+
 int Player::getScore()
 {
     return score;
+}
+
+void Player::setSpeed(float Speed)
+{
+    speed = Speed;
 }

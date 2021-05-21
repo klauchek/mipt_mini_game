@@ -30,6 +30,12 @@ Sprite Character::get_sprite()
 
 }
 
+IntRect Character:: getRect()
+{
+    return IntRect(x, y, w, h);
+}
+
+
 bool Character::update(Map& map, float time)
 {
     {
@@ -57,7 +63,6 @@ bool Character::update(Map& map, float time)
 
         speed = 0;
         sprite.setPosition(x, y);
-        
         
         return interactionWithMap(map, time);
     }

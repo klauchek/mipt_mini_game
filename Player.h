@@ -5,6 +5,7 @@
 #include "map.h"
 
 
+
 class Player : public Character
 {
 private:
@@ -18,8 +19,9 @@ public:
 	~Player();
 
 	bool interactionWithMap(Map& map, float time);
-	bool control(float time, Map& map, float CurrentFrame);
+	bool control(float time, Map& map, float& CurrentFrame);
 	int getScore();
+	void setSpeed(float Speed);
 
 };
 

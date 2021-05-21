@@ -34,8 +34,8 @@ public:
 	bool update(Map& map, float time); //реализация одинаковая, просто обработка направлений движения
 	virtual bool interactionWithMap(Map& map, float time) = 0;//у каждого своя реализация, правда, отличия небольшие - у playera добавится только обработка препятствий
 	//override??
-
-
+	IntRect getRect();
+	
 
 
 };

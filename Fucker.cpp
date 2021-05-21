@@ -16,7 +16,7 @@ void Fucker::set_direction(int dir)
 
 bool Fucker::control(float time, Map& map)
 {
-    speed = 0.15;
+    speed = 0.2;
 
     switch (direction)
     {
@@ -59,15 +59,7 @@ bool Fucker::interactionWithMap(Map& map, float time)
                     x = j * 50 + 50;//аналогично идем влево
                 }
             }
-            //else if (map.TileMap[i][j] == ' ')
-            //{
-            //    float cur_time = time;
-            //    while (time < cur_time + 10000)
-            //    {
-            //        speed = 0;
-            //        sprite.setPosition(300, 300);
-            //    }
-            //}
+ 
         }
 
 

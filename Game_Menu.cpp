@@ -1,8 +1,5 @@
 #include "Game_Menu.h"
-#include "Player.h"
-#include "Fucker.h"
-#include "map.h"
-#include "Exam.h"
+
 
 using namespace sf;
 
@@ -39,6 +36,21 @@ void Game_Menu::create_game_exit_button(const string& game_exit_button_)
     game_exit_button_texture.loadFromImage(game_exit_button);
     game_exit_button_sprite.setTexture(game_exit_button_texture);
     game_exit_button_sprite.setPosition(EXIT_BUTTON_POS_X, EXIT_BUTTON_POS_Y);
+}
+
+void Game_Menu::create_lose_window(const string& lose_window_)
+{
+    lose_window.loadFromFile(lose_window_);
+    lose_window_texture.loadFromImage(lose_window);
+    lose_window_sprite.setTexture(lose_window_texture);
+    lose_window_sprite.setPosition(0, 0);
+}
+void Game_Menu::create_win_window(const string& win_window_)
+{
+    win_window.loadFromFile(win_window_);
+    win_window_texture.loadFromImage(win_window);
+    win_window_sprite.setTexture(win_window_texture);
+    win_window_sprite.setPosition(0, 0);
 }
 
 
@@ -80,6 +92,7 @@ void Game_Menu::run_math(RenderWindow& window)
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
         }
 
  //------------------------------------------pseudo-random direction
@@ -117,6 +130,8 @@ void Game_Menu::run_math(RenderWindow& window)
  
 //------------------------------------------------------------------------
   
+
+
         student.control(time, map, CurrentFrame);
         Podlipskiy.control(time, map);
         Umnov_Jr.control(time, map);
@@ -136,6 +151,8 @@ void Game_Menu::run_math(RenderWindow& window)
 
 
         window.display();
+
+
 
     }
 }
@@ -229,6 +246,7 @@ void Game_Menu::run_phys(RenderWindow& window)
 
         window.display();
 
+
     }
 }
 
@@ -276,6 +294,60 @@ void Game_Menu::physics_department_button_pressed(RenderWindow& window)
     return;
 }
 
+void Game_Menu::show_win_window(RenderWindow& window)
+{
+    RenderWindow new_window(VideoMode(FINISH_WINDOW_WIDTH, FINISH_WINDOW_HEIGHT), "UR THE CHAMPION");
+    create_win_window("game_images/win.png");
+
+
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+    }
+    window.clear();
+
+    window.draw(win_window_sprite);
+
+
+    window.display();
+
+  /*  window.close();*/
+
+    return;
+}
+
+void Game_Menu::show_lose_window(RenderWindow& window)
+{
+    RenderWindow new_window(VideoMode(FINISH_WINDOW_WIDTH, FINISH_WINDOW_HEIGHT), "WASTED");
+    create_lose_window("game_images/lose.png");
+
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+    }
+
+    window.clear();
+
+    window.draw(lose_window_sprite);
+
+
+    window.display();
+
+    
+   /* window.close();*/
+
+    return;
+}
 
 //OK
 void Game_Menu::game_exit_button_pressed(RenderWindow& window)//почему статик
@@ -283,6 +355,27 @@ void Game_Menu::game_exit_button_pressed(RenderWindow& window)//почему статик
     window.close();
 }
 
+bool Game_Menu::game_finish(Fucker& fucker1, Fucker& fucker2, Player& player, ExamBar& exam)
+{
+    if (player.getRect().intersects(fucker1.getRect()))
+    {
+        player.setSpeed(0);
+
+        return false;
+    }
+    else if (player.getRect().intersects(fucker1.getRect()))
+    {
+        player.setSpeed(0);
+
+        return false;
+    }
+
+    else if (player.getScore() == 2)
+    {
+        return true;
+    }
+
+}
 
 //OK
 void Game_Menu::processing_menu(RenderWindow& window) //само меню со всеми кликабельными кнопочками
