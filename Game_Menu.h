@@ -91,8 +91,8 @@ public:
     void create_game_exit_button(const string& game_exit_button_);
 
     //-----------------------------running levels
-    void run_math(RenderWindow& window);
-    void run_phys(RenderWindow& window);
+    bool run_math(RenderWindow& window);
+    bool run_phys(RenderWindow& window);
 
     //------------------------------------------------processing bottons:
 
@@ -114,7 +114,8 @@ public:
     void create_lose_window(const string& lose_window_);
     //------------------------------------------------------------------
 
-    bool game_finish(Fucker& fucker1, Fucker& fucker2, Player& player, ExamBar& exam);
+    //void processing_finish_windows(RenderWindow& window);
+    bool game_finish(Fucker& fucker1, Fucker& fucker2, Player& player, ExamBar& exam, Map& map, float time);
 };
 
 

@@ -1,5 +1,7 @@
 #include "Game_Menu.h"
 
+#include <iostream>
+
 
 using namespace sf;
 
@@ -44,6 +46,8 @@ void Game_Menu::create_lose_window(const string& lose_window_)
     lose_window_texture.loadFromImage(lose_window);
     lose_window_sprite.setTexture(lose_window_texture);
     lose_window_sprite.setPosition(0, 0);
+
+    std::cout << "ok cretiong lose" << std::endl;
 }
 void Game_Menu::create_win_window(const string& win_window_)
 {
@@ -51,6 +55,8 @@ void Game_Menu::create_win_window(const string& win_window_)
     win_window_texture.loadFromImage(win_window);
     win_window_sprite.setTexture(win_window_texture);
     win_window_sprite.setPosition(0, 0);
+
+    std::cout << "ok cretiong win" << std::endl;
 }
 
 
@@ -58,7 +64,7 @@ void Game_Menu::create_win_window(const string& win_window_)
 
 
 //----------running levels 
-void Game_Menu::run_math(RenderWindow& window)
+bool Game_Menu::run_math(RenderWindow& window)
 {
 
     Map map("math_map.png");
@@ -74,7 +80,6 @@ void Game_Menu::run_math(RenderWindow& window)
 
     long long int counter = 1000;
 
-    //int mode = PATH;
 
     Podlipskiy.set_direction(DOWN);
     Umnov_Jr.set_direction(UP);
@@ -131,8 +136,7 @@ void Game_Menu::run_math(RenderWindow& window)
 //------------------------------------------------------------------------
   
 
-
-        student.control(time, map, CurrentFrame);
+        student.control(time, map, CurrentFrame, Podlipskiy, Umnov_Jr);
         Podlipskiy.control(time, map);
         Umnov_Jr.control(time, map);
         Exam.update(student.getScore());
@@ -151,14 +155,14 @@ void Game_Menu::run_math(RenderWindow& window)
 
 
         window.display();
-
-
-
+        
+        
     }
+    return true;
 }
 
 
-void Game_Menu::run_phys(RenderWindow& window)
+bool Game_Menu::run_phys(RenderWindow& window)
 {
 
     Map map("phys_map.png");
@@ -167,6 +171,7 @@ void Game_Menu::run_phys(RenderWindow& window)
     Player student("student.png", 100, 100, 100, 0, 41, 57);
     Fucker Bulygin("Bulygin.jpg", 200, 200, 0, 0, 55, 55);
     Fucker Kuznetsov("Kuznetsov.jpg", 300, 300, 0, 0, 55, 55);
+    ExamBar Exam;
 
     float CurrentFrame = 0;
     Clock clock;
@@ -192,7 +197,7 @@ void Game_Menu::run_phys(RenderWindow& window)
                 window.close();
         }
 
-  
+
         //------------------------------------------pseudo-random direction
 
         int a = 1429, b = 1811, c = 1747, d = 1578;
@@ -227,10 +232,14 @@ void Game_Menu::run_phys(RenderWindow& window)
         }
 
         //------------------------------------------------------------------------
- 
-        student.control(time, map, CurrentFrame);
+
+
+
+
+        student.control(time, map, CurrentFrame, Bulygin, Kuznetsov);
         Bulygin.control(time, map);
         Kuznetsov.control(time, map);
+        Exam.update(student.getScore());
 
 
 
@@ -242,24 +251,26 @@ void Game_Menu::run_phys(RenderWindow& window)
         window.draw(student.get_sprite());
         window.draw(Bulygin.get_sprite());
         window.draw(Kuznetsov.get_sprite());
+        Exam.draw(window);
 
 
         window.display();
-
-
     }
+
+    return true;
 }
 
 //---------processing bottons (грубо говоря: что делает каждая кнопка при нажатии)
 
 
 //OK
-void Game_Menu:: game_welcome_page(const string& game_menu_background_,
+void Game_Menu::game_welcome_page(const string& game_menu_background_,
     const string& game_exit_button_,
     const string& math_department_button_,
     const string& physics_department_button_)//создание всего, рисование всего
 {
     RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "EXAM SIMULATOR");
+
     create_game_menu_background(game_menu_background_);
     create_math_department_button(math_department_button_);
     create_physics_department_button(physics_department_button_);
@@ -283,6 +294,8 @@ void Game_Menu::math_department_button_pressed(RenderWindow& window)
     window.close();
     run_math(new_window);
 
+
+
     return;
 }
 void Game_Menu::physics_department_button_pressed(RenderWindow& window)
@@ -291,63 +304,31 @@ void Game_Menu::physics_department_button_pressed(RenderWindow& window)
     window.close();
     run_phys(new_window);
 
+  
     return;
 }
 
 void Game_Menu::show_win_window(RenderWindow& window)
 {
-    RenderWindow new_window(VideoMode(FINISH_WINDOW_WIDTH, FINISH_WINDOW_HEIGHT), "UR THE CHAMPION");
+    RenderWindow new_window_(VideoMode(FINISH_WINDOW_WIDTH, FINISH_WINDOW_HEIGHT), "UR THE CHAMPION");
     create_win_window("game_images/win.png");
+    new_window_.clear();
+    new_window_.draw(win_window_sprite);
+    new_window_.display();
 
-
-    while (window.isOpen())
-    {
-        Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-    }
-    window.clear();
-
-    window.draw(win_window_sprite);
-
-
-    window.display();
-
-  /*  window.close();*/
-
-    return;
 }
 
 void Game_Menu::show_lose_window(RenderWindow& window)
 {
-    RenderWindow new_window(VideoMode(FINISH_WINDOW_WIDTH, FINISH_WINDOW_HEIGHT), "WASTED");
+    RenderWindow new_window_(VideoMode(FINISH_WINDOW_WIDTH, FINISH_WINDOW_HEIGHT), "WASTED");
     create_lose_window("game_images/lose.png");
 
-    while (window.isOpen())
-    {
-        Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-    }
+    new_window_.clear();
+    new_window_.draw(lose_window_sprite);
+    new_window_.display();
 
-    window.clear();
-
-    window.draw(lose_window_sprite);
-
-
-    window.display();
-
-    
-   /* window.close();*/
-
-    return;
 }
+
 
 //OK
 void Game_Menu::game_exit_button_pressed(RenderWindow& window)//почему статик
@@ -355,27 +336,7 @@ void Game_Menu::game_exit_button_pressed(RenderWindow& window)//почему статик
     window.close();
 }
 
-bool Game_Menu::game_finish(Fucker& fucker1, Fucker& fucker2, Player& player, ExamBar& exam)
-{
-    if (player.getRect().intersects(fucker1.getRect()))
-    {
-        player.setSpeed(0);
 
-        return false;
-    }
-    else if (player.getRect().intersects(fucker1.getRect()))
-    {
-        player.setSpeed(0);
-
-        return false;
-    }
-
-    else if (player.getScore() == 2)
-    {
-        return true;
-    }
-
-}
 
 //OK
 void Game_Menu::processing_menu(RenderWindow& window) //само меню со всеми кликабельными кнопочками

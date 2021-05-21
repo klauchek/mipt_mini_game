@@ -2,6 +2,7 @@
 #define __PLAYER__H__
 
 #include "Character.h"
+#include "Fucker.h"
 #include "map.h"
 
 
@@ -19,7 +20,7 @@ public:
 	~Player();
 
 	bool interactionWithMap(Map& map, float time);
-	bool control(float time, Map& map, float& CurrentFrame);
+	bool control(float time, Map& map, float& CurrentFrame, Fucker& fucker1, Fucker& fucker2);
 	int getScore();
 	void setSpeed(float Speed);
 

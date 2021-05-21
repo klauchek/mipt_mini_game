@@ -53,7 +53,7 @@ bool Player::interactionWithMap(Map& map, float time)
 }
 
 
-bool Player::control(float time, Map& map, float& CurrentFrame)
+bool Player::control(float time, Map& map, float& CurrentFrame, Fucker& fucker1, Fucker& fucker2)
 {
 
     //if (mode == PATH)
@@ -86,6 +86,21 @@ bool Player::control(float time, Map& map, float& CurrentFrame)
         direction = DOWN;
         CurrentFrame = CurrentFrame > 1 ? 0 : CurrentFrame;
         sprite.setTextureRect(IntRect(41 * int(CurrentFrame), 0, 41, 57));
+    }
+    else if (getRect().intersects(fucker1.getRect()))
+    {
+        speed = 0;
+
+    }
+    else if (getRect().intersects(fucker2.getRect()))
+    {
+        speed = 0;
+    }
+
+    else if (score == 2)
+    {
+        std::cout << "WIN";
+        speed = 0;
     }
     else
         speed = 0;
